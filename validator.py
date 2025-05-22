@@ -17,5 +17,8 @@ def house_validator(house):
     if not (type(house[4]) == str and house[4]>0):
         errors.append('House option must be string > 0')
 
+    if not (type(house[5]) == str and house[5]>0):
+        errors.append('House option must be string > 0')
+
     return errors
 

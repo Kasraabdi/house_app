@@ -13,19 +13,21 @@ def load_data(house_list):
         table.delete(row)
 
     for house in house_list:
-        table.insert("", END, values=(house .id , house .m ,house.area , house.address))
+        table.insert("", END, values=(house .id , house .metrazh ,house.area , house.address, house.elvator ,house.parking))
 
 
 def reset_form():
     id.set(len(house_list) + 1)
-    m.set("")
-    area.set("")
+    metrazh.set(0)
+    area.set(0)
     address.set(0)
+    elvator.set(0)
+    parking.set(0)
     load_data(house_list)
 
 
 def save_btn_click():
-     house= (id.get(), m.get(), area.get(), address.get())
+    house= (id.get(), metrazh.get(), area.get(), address.get(), elvator() , parking())
     errors = house_validator(house)
     if errors:
         msg.showerror("Errors", "\n".join(errors))
@@ -40,9 +42,11 @@ def table_select(x):
     selected_house = table.item(table.focus())["values"]
     if selected_house:
         id.set(selected_house[0])
-        m.set(selected_house[1])
+        metrazh.set(selected_house[1])
         area.set(selected_house[2])
         address.set(selected_house[3])
+        elvator.set(selected_house[4])
+        parking.set(selected_house[5])
 
 
 def edit_btn_click():
@@ -55,21 +59,21 @@ def remove_btn_click():
 
 window = Tk()
 window.title("house Info")
-window.geometry("610x270")
+window.geometry("8000x8000")
 
 # Id
 Label(window, text="Id").place(x=20, y=20)
 id = IntVar(value=1)
 Entry(window, textvariable=id, state="readonly").place(x=80, y=20)
 
-# M
-Label(window, text="M").place(x=20, y=60)
-m = IntVar()
-Entry(window, textvariable=m).place(x=80, y=60)
+# Metrazh
+Label(window, text="Metrazh").place(x=20, y=60)
+metrazh = IntVar()
+Entry(window, textvariable=metrazh).place(x=80, y=60)
 
 # area
 Label(window, text="area").place(x=20, y=100)
-area = int()
+area = IntVar()
 Entry(window, textvariable=area).place(x=80, y=100)
 
 # address
@@ -77,25 +81,39 @@ Label(window, text="address").place(x=20, y=140)
 address = IntVar()
 Entry(window, textvariable=address).place(x=80, y=140)
 
-table = ttk.Treeview(window, columns=[1, 2, 3, 4], show="headings")
+#elvator
+Label(window, text="elvator").place(x=20, y=180)
+elvator = IntVar()
+Entry(window, textvariable=elvator).place(x=80, y=180)
+
+#parking
+Label(window, text="parking").place(x=20, y=220)
+parking = IntVar()
+Entry(window, textvariable=parking).place(x=80, y=220)
+
+table = ttk.Treeview(window, columns=[1, 2, 3, 4 , 5, 6], show="headings")
 table.heading(1, text="Id")
-table.heading(2, text="M")
+table.heading(2, text="Metrazh")
 table.heading(3, text="area")
 table.heading(4, text="address")
+table.heading(5, text="elvator")
+table.heading(6, text="parking")
 
 table.column(1, width=60)
 table.column(2, width=100)
 table.column(3, width=100)
 table.column(4, width=100)
+table.column(5, width=100)
+table.column(6, width=100)
 
 table.bind("<<TreeviewSelect>>", table_select)
 
-table.place(x=230, y=20)
+table.place(x=20, y=20)
 
-Button(window, text="Save", width=6, command=save_btn_click).place(x=20, y=220)
-Button(window, text="Edit", width=6, command=edit_btn_click).place(x=90, y=220)
-Button(window, text="Remove", width=6, command=remove_btn_click).place(x=160, y=220)
-Button(window, text="Clear", width=6, command=reset_form).place(x=20, y=180, width=190)
+Button(window, text="Save", width=6, command=save_btn_click).place(x=90, y=220)
+Button(window, text="Edit", width=6, command=edit_btn_click).place(x=180, y=220)
+Button(window, text="Remove", width=6, command=remove_btn_click).place(x=270, y=220)
+Button(window, text="Clear", width=6, command=reset_form).place(x=360, y=180, width=300)
 
 reset_form()
 
