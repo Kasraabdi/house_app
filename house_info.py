@@ -13,7 +13,7 @@ def load_data(house_list):
         table.delete(row)
 
     for house in house_list:
-        table.insert("", END, values=(house .id , house .metrazh ,house.area , house.address, house.elvator ,house.parking))
+        table.insert("", END, values=(house.id , house.metrazh ,house.area , house.address, house.elvator ,house.parking))
 
 
 def reset_form():
@@ -21,13 +21,13 @@ def reset_form():
     metrazh.set(0)
     area.set(0)
     address.set(0)
-    elvator.set(0)
+    elevator.set(0)
     parking.set(0)
     load_data(house_list)
 
 
 def save_btn_click():
-    house= (id.get(), metrazh.get(), area.get(), address.get(), elvator() , parking())
+    house= (id.get(), metrazh.get(), area.get(), address.get(), elevator.get() , parking.get())
     errors = house_validator(house)
     if errors:
         msg.showerror("Errors", "\n".join(errors))
@@ -45,7 +45,7 @@ def table_select(x):
         metrazh.set(selected_house[1])
         area.set(selected_house[2])
         address.set(selected_house[3])
-        elvator.set(selected_house[4])
+        elevator.set(selected_house[4])
         parking.set(selected_house[5])
 
 
@@ -59,7 +59,7 @@ def remove_btn_click():
 
 window = Tk()
 window.title("house Info")
-window.geometry("8000x8000")
+window.geometry("610x360")
 
 # Id
 Label(window, text="Id").place(x=20, y=20)
@@ -82,9 +82,9 @@ address = IntVar()
 Entry(window, textvariable=address).place(x=80, y=140)
 
 #elvator
-Label(window, text="elvator").place(x=20, y=180)
-elvator = IntVar()
-Entry(window, textvariable=elvator).place(x=80, y=180)
+Label(window, text="elevator").place(x=20, y=180)
+elevator = IntVar()
+Entry(window, textvariable=elevator).place(x=80, y=180)
 
 #parking
 Label(window, text="parking").place(x=20, y=220)
@@ -103,17 +103,17 @@ table.column(1, width=60)
 table.column(2, width=100)
 table.column(3, width=100)
 table.column(4, width=100)
-table.column(5, width=100)
-table.column(6, width=100)
+Checkbutton(5, width=100)
+Checkbutton(6, width=100)
 
 table.bind("<<TreeviewSelect>>", table_select)
 
-table.place(x=20, y=20)
+table.place(x=230, y=20)
 
-Button(window, text="Save", width=6, command=save_btn_click).place(x=90, y=220)
-Button(window, text="Edit", width=6, command=edit_btn_click).place(x=180, y=220)
-Button(window, text="Remove", width=6, command=remove_btn_click).place(x=270, y=220)
-Button(window, text="Clear", width=6, command=reset_form).place(x=360, y=180, width=300)
+Button(window, text="Save", width=6, command=save_btn_click).place(x=20, y=310)
+Button(window, text="Edit", width=6, command=edit_btn_click).place(x=90, y=310)
+Button(window, text="Remove", width=6, command=remove_btn_click).place(x=160, y=310)
+Button(window, text="Clear", width=6, command=reset_form).place(x=20, y=260, width=190)
 
 reset_form()
 
