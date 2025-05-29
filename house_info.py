@@ -21,13 +21,13 @@ def reset_form():
     metrazh.set(0)
     area.set(0)
     address.set(0)
-    elevator.set(0)
+    elevetor.set(0)
     parking.set(0)
     load_data(house_list)
 
 
 def save_btn_click():
-    house= (id.get(), metrazh.get(), area.get(), address.get(), elevator.get() , parking.get())
+    house= (id.get(), metrazh.get(), area.get(), address.get(), elevetor.get() , parking.get())
     errors = house_validator(house)
     if errors:
         msg.showerror("Errors", "\n".join(errors))
@@ -45,7 +45,7 @@ def table_select(x):
         metrazh.set(selected_house[1])
         area.set(selected_house[2])
         address.set(selected_house[3])
-        elevator.set(selected_house[4])
+        elevetor.set(selected_house[4])
         parking.set(selected_house[5])
 
 
@@ -81,30 +81,30 @@ Label(window, text="address").place(x=20, y=140)
 address = IntVar()
 Entry(window, textvariable=address).place(x=80, y=140)
 
+
+Label(window, text="Options").place(x=20, y=180)
+
 #elvator
-Label(window, text="elevator").place(x=20, y=180)
-elevator = IntVar()
-Entry(window, textvariable=elevator).place(x=80, y=180)
+elevetor = BooleanVar()
+Checkbutton(window, text="Elevetor", variable=elevetor).place(x=80, y=180)
 
 #parking
-Label(window, text="parking").place(x=20, y=220)
-parking = IntVar()
-Entry(window, textvariable=parking).place(x=80, y=220)
+parking = BooleanVar()
+Checkbutton(window, text="Parking", variable=parking).place(x=80, y=200)
 
-table = ttk.Treeview(window, columns=[1, 2, 3, 4 , 5, 6], show="headings")
+table = ttk.Treeview(window, columns=[1, 2, 3, 4], show="headings")
 table.heading(1, text="Id")
 table.heading(2, text="Metrazh")
 table.heading(3, text="area")
 table.heading(4, text="address")
-table.heading(5, text="elvator")
-table.heading(6, text="parking")
 
 table.column(1, width=60)
 table.column(2, width=100)
 table.column(3, width=100)
 table.column(4, width=100)
-Checkbutton(5, width=100)
-Checkbutton(6, width=100)
+
+
+Checkbutton(window, text="Parking")
 
 table.bind("<<TreeviewSelect>>", table_select)
 
