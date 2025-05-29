@@ -1,8 +1,12 @@
 from tkinter import *
 import tkinter.ttk as ttk
 import tkinter.messagebox as msg
+
+from plotly.graph_objs.bar import Selected
+
 from file_manager import *
 from validator import *
+from house import House
 
 house_list = read_from_file("house.dat")
 
@@ -39,14 +43,14 @@ def save_btn_click():
 
 
 def table_select(x):
-    selected_house = table.item(table.focus())["values"]
+    selected_house = House (*table.item(table.focus())["values"])
     if selected_house:
-        id.set(selected_house[0])
-        metrazh.set(selected_house[1])
-        area.set(selected_house[2])
-        address.set(selected_house[3])
-        elevetor.set(selected_house[4])
-        parking.set(selected_house[5])
+        id.set(selected_house.id)
+        metrazh.set(selected_house.metrazh)
+        area.set(selected_house.area)
+        address.set(selected_house.address)
+        elevetor.set(selected_house.elvator)
+        parking.set( selected_house.parking)
 
 
 def edit_btn_click():
@@ -54,7 +58,10 @@ def edit_btn_click():
 
 
 def remove_btn_click():
-    pass
+    Selected_house = (table.focus())["valus"]
+    if Selected_house:
+        table.delete(Selected_house)
+
 
 
 window = Tk()
